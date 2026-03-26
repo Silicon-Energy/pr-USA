@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PR USA — Silicon</title>
+<title>Pipeline Review — Silicon</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -407,6 +407,80 @@
     margin-top: 6px;
   }
 
+
+  /* Checkboxes */
+  .prep-item {
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 20px;
+    border-bottom: 1px solid #252525;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .prep-item:last-child { border-bottom: none; }
+  .prep-item:hover { background: #232323; }
+
+  .prep-item.checked { opacity: 0.5; }
+  .prep-item.checked .prep-text { text-decoration: line-through; color: #666; }
+
+  .prep-checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid #444;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: transparent;
+  }
+
+  .prep-item.checked .prep-checkbox {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  .prep-checkbox::after {
+    content: '';
+    display: none;
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #111;
+    border-bottom: 2px solid #111;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  .prep-item.checked .prep-checkbox::after { display: block; }
+
+  .prep-text {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ccc;
+    flex: 1;
+    transition: all 0.2s;
+  }
+
+  .prep-reset {
+    font-size: 10px;
+    color: #444;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: transparent;
+    margin-left: auto;
+    transition: all 0.15s;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .prep-reset:hover { color: var(--muted); border-color: #555; }
+
   /* Footer */
   .footer {
     text-align: center;
@@ -671,14 +745,26 @@
     </div>
 
     <div class="bottom-card">
-      <div class="bottom-header">
-        <span>📌</span>
-        <span class="bottom-header-title">Preparação prévia obrigatória</span>
+      <div class="bottom-header" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span>📌</span>
+          <span class="bottom-header-title">Preparação prévia obrigatória</span>
+        </div>
+        <button class="prep-reset" onclick="resetPrep('usa')">Limpar</button>
       </div>
-      <ul class="bottom-body">
-        <li><div class="dot" style="background:var(--red)"></div>Atualizar e organizar o funil (quentes, aquecimento e abertura) no CRM antes da reunião.</li>
-        <li><div class="dot" style="background:var(--orange)"></div>Definir previamente quantas OPs serão discutidas, considerando o tempo disponível e o estágio do funil.</li>
-        <li><div class="dot" style="background:var(--teal)"></div>Preparar a pauta da S&amp;OP: projetos que entrarão em discussão, recursos que exigem atenção e riscos que precisam ser endereçados.</li>
+      <ul class="bottom-body" id="prep-list-usa">
+        <li class="prep-item" id="prep-usa-0" onclick="togglePrep('usa', 0)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Atualizar e organizar o funil (quentes, aquecimento e abertura) no CRM antes da reunião.</span>
+        </li>
+        <li class="prep-item" id="prep-usa-1" onclick="togglePrep('usa', 1)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Definir previamente quantas OPs serão discutidas, considerando o tempo disponível e o estágio do funil.</span>
+        </li>
+        <li class="prep-item" id="prep-usa-2" onclick="togglePrep('usa', 2)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Preparar a pauta da S&amp;OP: projetos que entrarão em discussão, recursos que exigem atenção e riscos que precisam ser endereçados.</span>
+        </li>
       </ul>
     </div>
 
@@ -690,5 +776,32 @@
   </div>
 
 </div>
+
+<script>
+  const STORAGE_KEY = 'prep_usa';
+
+  function loadPrep() {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    saved.forEach(i => {
+      const el = document.getElementById('prep-usa-' + i);
+      if (el) el.classList.add('checked');
+    });
+  }
+
+  function togglePrep(key, index) {
+    const el = document.getElementById('prep-' + key + '-' + index);
+    el.classList.toggle('checked');
+    const checked = [...document.querySelectorAll('#prep-list-' + key + ' .prep-item.checked')]
+      .map(e => parseInt(e.id.split('-').pop()));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+  }
+
+  function resetPrep(key) {
+    document.querySelectorAll('#prep-list-' + key + ' .prep-item').forEach(el => el.classList.remove('checked'));
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  loadPrep();
+</script>
 </body>
 </html>
