@@ -560,6 +560,33 @@
     </div>
   </div>
 
+
+  <!-- PREP -->
+
+    <div class="bottom-card">
+      <div class="bottom-header" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span>📌</span>
+          <span class="bottom-header-title">Preparação prévia obrigatória</span>
+        </div>
+        <button class="prep-reset" onclick="resetPrep('usa')">Limpar</button>
+      </div>
+      <ul class="bottom-body" id="prep-list-usa">
+        <li class="prep-item" id="prep-usa-0" onclick="togglePrep('usa', 0)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Atualizar e organizar o funil (quentes, aquecimento e abertura) no CRM antes da reunião.</span>
+        </li>
+        <li class="prep-item" id="prep-usa-1" onclick="togglePrep('usa', 1)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Definir previamente quantas OPs serão discutidas, considerando o tempo disponível e o estágio do funil.</span>
+        </li>
+        <li class="prep-item" id="prep-usa-2" onclick="togglePrep('usa', 2)">
+          <div class="prep-checkbox"></div>
+          <span class="prep-text">Preparar a pauta da S&amp;OP: projetos que entrarão em discussão, recursos que exigem atenção e riscos que precisam ser endereçados.</span>
+        </li>
+      </ul>
+    </div>
+
   <!-- CRONOGRAMA -->
   <div>
     <div class="section-label">⏳ Cronograma da reunião</div>
@@ -741,30 +768,6 @@
         <li><div class="dot" style="background:var(--teal)"></div>Definição das OPs e dos recursos que serão encaminhados para a S&amp;OP.</li>
         <li><div class="dot" style="background:var(--purple)"></div>Aprovação de viagens e condições comerciais necessárias para avanço das OPs.</li>
         <li><div class="dot" style="background:var(--red)"></div>Garantia de que a venda está no centro de todas as decisões da reunião.</li>
-      </ul>
-    </div>
-
-    <div class="bottom-card">
-      <div class="bottom-header" style="justify-content:space-between;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span>📌</span>
-          <span class="bottom-header-title">Preparação prévia obrigatória</span>
-        </div>
-        <button class="prep-reset" onclick="resetPrep('usa')">Limpar</button>
-      </div>
-      <ul class="bottom-body" id="prep-list-usa">
-        <li class="prep-item" id="prep-usa-0" onclick="togglePrep('usa', 0)">
-          <div class="prep-checkbox"></div>
-          <span class="prep-text">Atualizar e organizar o funil (quentes, aquecimento e abertura) no CRM antes da reunião.</span>
-        </li>
-        <li class="prep-item" id="prep-usa-1" onclick="togglePrep('usa', 1)">
-          <div class="prep-checkbox"></div>
-          <span class="prep-text">Definir previamente quantas OPs serão discutidas, considerando o tempo disponível e o estágio do funil.</span>
-        </li>
-        <li class="prep-item" id="prep-usa-2" onclick="togglePrep('usa', 2)">
-          <div class="prep-checkbox"></div>
-          <span class="prep-text">Preparar a pauta da S&amp;OP: projetos que entrarão em discussão, recursos que exigem atenção e riscos que precisam ser endereçados.</span>
-        </li>
       </ul>
     </div>
 
